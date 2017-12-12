@@ -2,11 +2,11 @@
 // Circle-shaped cookie cutter with small circles around it
 //
 
-$r  = 25; // radius of the circle on whose perimeter the centers of the smaller circles are
+$r  = 20; // radius of the circle on whose perimeter the centers of the smaller circles are
 $h  = 15; // total height of the cutter
 $n  =  8; // number of the smaller circles around the perimeter
 $w  =  1; // wall thickness
-$fw =  4; // foot wall thickness
+$fw =  3; // foot wall thickness
 $fh =  1; // foot height
 
 $fn=64;
