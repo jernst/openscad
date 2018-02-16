@@ -2,51 +2,36 @@
 //
 //
 
-use <../lib/Standoff.scad>
-
 $l = 200;
 $w = 120;
-$t =   2;
+$t =   1.4;
 
 $rpi_w = 23;
 $rpi_l = 58.5;
 
-$holder_l    = 10;
-$holder_w    = 10;
-$standoff_h  =  8;
-$standoff_r  =  3;
-$m3CutHole_r =  2.7/2;    // radius of hole into which self-cutting M3 scews cut into --empirically
+module Pin() {
+    union() {
+        translate( [ 0, 0, 5 ] ) {
+            cylinder( $fn = 36, h = 10, r1 = 1.5, r2 = 1.25, center = true);
+        }
+        translate( [ 0, 0, 3 ] ) {
+            cylinder( $fn = 36, h = 6,  r1 = 2.5, r2 = 2.5, center = true);
+        }
+    }
+}
 
 module Holder() {
-    union() {
-        translate( [ 0, 0, $t/2 ] ) {
-            Standoff(
-                    height     = $standoff_h,
-                    radius     = $standoff_r,
-                    holeDepth  = $standoff_h,
-                    holeRadius = $m3CutHole_r );
-        }
-        translate( [ $rpi_w, 0, $t/2 ] ) {
-            Standoff(
-                    height     = $standoff_h,
-                    radius     = $standoff_r,
-                    holeDepth  = $standoff_h,
-                    holeRadius = $m3CutHole_r );
-        }
-        translate( [ 0, $rpi_l, $t/2 ] ) {
-            Standoff(
-                    height     = $standoff_h,
-                    radius     = $standoff_r,
-                    holeDepth  = $standoff_h,
-                    holeRadius = $m3CutHole_r );
-        }
-        translate( [ $rpi_w, $rpi_l, $t/2 ] ) {
-            Standoff(
-                    height     = $standoff_h,
-                    radius     = $standoff_r,
-                    holeDepth  = $standoff_h,
-                    holeRadius = $m3CutHole_r );
-        }
+    translate( [ 0, 0, 0 ] ) {
+        Pin();
+    }
+    translate( [ $rpi_w, 0, 0 ] ) {
+        Pin();
+    }
+    translate( [ 0, $rpi_l, 0 ] ) {
+        Pin();
+    }
+    translate( [ $rpi_w, $rpi_l, 0 ] ) {
+        Pin();
     }
 }
 
