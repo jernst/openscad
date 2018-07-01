@@ -2,12 +2,14 @@
 // A grid insert for a plastic bowl
 //
 
-$w   = 140;  // width
+$fn=128;
+
+$w   = 130;  // width
 $t_w =   2;  // thickness in width direction
 $t_h =   5;  // thickness in height direction
 
 $w_n = 4;    // number of segments in width direction
-$d_n = 3;    // number of segments in depth direction
+$d_n = 6;    // number of segments in depth direction
 
 $d   = $w;   // depth
 $t_d = $t_w; // thickness in depth direction
