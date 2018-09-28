@@ -2,20 +2,21 @@
 //
 //
 
-$length = 120;
-$width  =  60;
-$height =  16;
+$length = 140;
+$width  =  80;
+$height =  20;
 $t      =   3;
-$hole    =  7;
+$t2     =   5;
+$hole   =   6;
 
 difference() {
     union() {
         // the cross
         translate( [ -$length/2 , -$hole/2-$t, 0 ] ) {
-            cube( [ $length, $hole + 2*$t, $t ] );
+            cube( [ $length, $hole + 2*$t, $t2 ] );
         };
         translate( [ -$hole/2-$t, -$width/2, 0 ] ) {
-            cube( [ $hole + 2*$t, $width, $t ] );
+            cube( [ $hole + 2*$t, $width, $t2 ] );
         };
 
         // the cubes
