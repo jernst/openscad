@@ -14,4 +14,6 @@ delta = 0;
 p = [ for( alpha = [ 0 : 30 : 360 ] ) [ cos(alpha) * r, sin(alpha) * r ]];
 q = [ for( alpha = [ 0 : 30 : 360 ] ) [ [ cos(alpha) * r2, sin(alpha) * r2 ], [ cos(alpha+delta) * r2, sin(alpha+delta) * r2 ] ]];
 
-polygon( bezier_curve_seq( p, q ));
+linear_extrude( 10 ) {
+    polygon( bezier_curve_seq( p, q ));
+};
