@@ -1,5 +1,10 @@
 # 3D-printable enclosure for the Moddable-2
 
+The Moddable-2 is an ESP32-based embedded development module with touch
+screen, and this is a simple, 3D-printable enclosure for it. Have fun!
+
+See https://www.moddable.com/purchase.php
+
 ![Rendering](moddable-2-box.png)
 
 You will need:
@@ -27,4 +32,7 @@ Note:
   a few other things, you may need to adjust the radius of the holes so
   the screws fit snugly. This is parameter `hole_r` in the OpenSCAD file.
 
+License:
 
+* Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+  License, see http://creativecommons.org/licenses/by-nc-sa/4.0/
