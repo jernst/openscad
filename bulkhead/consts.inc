@@ -3,7 +3,7 @@ $fn = 120;
 in = 25.4;
 eps = 0.01;
 
-toolCubeD = 1.25 * in;
+toolCubeD = 1.5 * in;
 toolCubeH = 0.25 * in;
 
 oRingT = 1/8 * in;

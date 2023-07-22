@@ -1,7 +1,8 @@
 eps = 0.01;
 $fn = 64;
-chamfer = 2; // 1;
+chamfer = 2;
 
+footheight=3;
 
 module roundedBox( width, depth, height, cornerRadius ) {
     union() {
@@ -28,7 +29,7 @@ module roundedBox( width, depth, height, cornerRadius ) {
 
 module foot() {
     r = 5;
-    h = 3;
+    h = footheight;
 
     intersection() {
         translate( [ 0, 0, r-h ] ) {
@@ -42,67 +43,56 @@ module foot() {
 
 module frame( width, depth, height, thickness, outerCornerRadius ) {
     difference() {
-        roundedBox( width, depth, height, outerCornerRadius );
+        union() {
+            roundedBox( width, depth, height, outerCornerRadius );
+
+            feetInsetX = 14;
+            feetInsetY = 10;
+
+            // feet
+
+            translate( [ feetInsetX, 0, feetInsetY ] )
+            rotate( [ -90, 0, 0 ] ) {
+                foot();
+            }
+
+            translate( [ feetInsetX, 0, height-feetInsetY ] )
+            rotate( [ -90, 0, 0 ] ) {
+                foot();
+            }
+            translate( [ width - feetInsetX, 0, feetInsetY ] )
+            rotate( [ -90, 0, 0 ] ) {
+                foot();
+            }
+
+            translate( [ width - feetInsetX, 0, height-feetInsetY ] )
+            rotate( [ -90, 0, 0 ] ) {
+                foot();
+            }
+        }
 
         translate( [ thickness,  thickness, -eps ] ) {
             roundedBox( width - 2 * thickness, depth - 2 * thickness, height + 2 * eps, outerCornerRadius - thickness );
         }
 
-        // bottom
-
-        bottomCutoutInsetX = 20;
-        bottomCutoutInsetY = 10;
-        bottomCutoutWidth = width - 2 * bottomCutoutInsetX;
-
-        translate( [ bottomCutoutInsetX, -eps, bottomCutoutInsetY ] ) {
-            cube( [ bottomCutoutWidth, thickness + 2 * eps, height - bottomCutoutInsetY + eps ] );
-        }
-
-        // top
-
-        translate( [ 45, depth - thickness - eps, height/2 ] )
+        translate( [ 45, - footheight - eps, height/2 ] )
         rotate( [ -90, 0, 0 ] ) {
-            scale( [ 1.5, 1, 1 ] )
-            cylinder( r = 20 + 2 * chamfer, h = thickness + 2 * eps);
+            scale( [ 1.25, 1, 1 ] )
+            cylinder( r = 20 + 2 * chamfer, h = depth + footheight + 2 * eps);
         }
 
         brushCutoutRadius = 10;
-        brushCutoutInset = 16;
+        brushCutoutInset = 15;
 
-        translate( [ width - 25, depth - thickness - eps, brushCutoutInset ] )
+        translate( [ width - 25, - footheight - eps, brushCutoutInset ] )
         rotate( [ -90, 0, 0 ] ) {
-            cylinder( r = brushCutoutRadius, h = thickness + 2 * eps);
+            cylinder( r = brushCutoutRadius, h = depth + footheight + 2 * eps);
         }
 
-        translate( [ width - 25, depth - thickness - eps, height - brushCutoutInset ] )
+        translate( [ width - 25, - footheight - eps, height - brushCutoutInset ] )
         rotate( [ -90, 0, 0 ] ) {
-            cylinder( r = brushCutoutRadius, h = thickness + 2 * eps);
+            cylinder( r = brushCutoutRadius, h = depth + footheight + 2 * eps);
         }
-
-    }
-
-    // feet
-
-    feetInsetX = 14;
-    feetInsetY = 10;
-
-    translate( [ feetInsetX, 0, feetInsetY ] )
-    rotate( [ -90, 0, 0 ] ) {
-        foot();
-    }
-
-    translate( [ feetInsetX, 0, height-feetInsetY ] )
-    rotate( [ -90, 0, 0 ] ) {
-        foot();
-    }
-    translate( [ width - feetInsetX, 0, feetInsetY ] )
-    rotate( [ -90, 0, 0 ] ) {
-        foot();
-    }
-
-    translate( [ width - feetInsetX, 0, height-feetInsetY ] )
-    rotate( [ -90, 0, 0 ] ) {
-        foot();
     }
 }
 
@@ -117,7 +107,7 @@ if( chamfer > 0 ) {
         sphere( r=chamfer );
 
         translate( [ chamfer, chamfer, chamfer ] ) {
-          frame( width - 2 * chamfer, depth - 2 * chamfer, height - 2 * chamfer, thickness - 2 * chamfer, outerCornerRadius );
+            frame( width - 2 * chamfer, depth - 2 * chamfer, height - 2 * chamfer, thickness - 2 * chamfer, outerCornerRadius );
         }
     }
 } else {
