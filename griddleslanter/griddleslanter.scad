@@ -6,8 +6,8 @@ $foot_w = 30;
 $foot_d = 40;
 $top_d  = 10;
 
-$h        = 30;
-$saddle_h = 25;
+$h        = 25;
+$saddle_h = 5;
 $saddle_w = 18;
 
 difference() {
@@ -22,7 +22,7 @@ difference() {
         ] );
     };
 
-    translate( [ ($foot_w - $saddle_w )/2, 0, $saddle_h ]) {
+    translate( [ ($foot_w - $saddle_w )/2, 0, $h - $saddle_h ]) {
         cube( [ $saddle_w, $foot_d, $h ] );
     }
 }

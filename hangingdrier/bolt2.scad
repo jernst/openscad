@@ -2,7 +2,7 @@
 
 difference() {
     union() {
-        cylinder( r=5, h=50 );
+        cylinder( r=5, h=40 );
 
         translate( [ 0, -5, 0 ] )
         cube( [ 15, 10, 6 ] );

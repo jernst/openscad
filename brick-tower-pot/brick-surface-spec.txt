@@ -1,0 +1,9 @@
+RidgedMulti:name=ridged;freq=0.2;oct=3;lac=0.5
+Perlin:name=base
+Add:name=add
+ScaleBias:name=scale;scale=0.3
+Connect:source=ridged;sink=add;instance=0
+Connect:source=base;sink=add;instance=1
+Connect:source=add;sink=scale
+Output:module=scale;builder=brick;bounds=30.0,30.0,5.0,5.0;destsize=23,13;edgegradientdepth=5;edgegradientelevation=0.6
+

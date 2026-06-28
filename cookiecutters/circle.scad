@@ -2,11 +2,12 @@
 // Plain circle-shaped cookie cutter
 //
 
-$r  = 20; // radius of the circle
+$r  = 32.5; // radius of the circle
 $h  = 15; // total height of the cutter
 $w  =  1; // wall thickness
 $fw =  3; // foot wall thickness
 $fh =  1; // foot height
+eps = 0.01;
 
 $fn=64;
 
@@ -36,7 +37,8 @@ module makeCookieCutter() {
                 }
             }
         }
-        linear_extrude( height=$h ) {
+        translate([0, 0, -eps])
+        linear_extrude( height=$h+2*eps ) {
             children();
         }
     }

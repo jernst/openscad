@@ -2,13 +2,13 @@
 //
 //
 
-$foot_w     = 150;
-$foot_d     = 150;
+$foot_w     = 130;
+$foot_d     = 115;
 $foot_h1    =   4;
 $foot_r     =   3;
 $foot_h2    = $foot_h1 + 2*$foot_r;
 
-$rib_w = 120;
+$rib_w = $foot_w;
 $rib_d =  10;
 $rib_h = 135;
 $rib_gap_d = 25;
@@ -40,6 +40,7 @@ $standoffPoints_y = [
 ];
 
 $fn = 64;
+$eps = 0.1;
 
 module Rib() {
     // cube( [ $rib_w, $rib_d, $rib_h ] );
@@ -65,13 +66,34 @@ module Standoff() {
                 cube( [ 2*$standoff_r, $standoff_support_h, $standoff_h ] );
 
                 for( i=[0:2] ) {
-                    translate( [ 2*$standoff_r, 0, i * ($rib_gap_d + $rib_d ) + $rib_d/2 ] )
+                    translate( [ 2*$standoff_r + $eps, -$eps, i * ($rib_gap_d + $rib_d ) + $rib_d/2 ] )
                     rotate( -90, [0, 1, 0 ] ) {
-                        linear_extrude( height=2*$standoff_r ) {
+                        linear_extrude( height=2*$standoff_r + 2*$eps ) {
                             polygon( [ [ 0, 0 ], [ $rib_gap_d, 0 ], [ $rib_gap_d/2, $standoff_support_h ]] );
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+module Wall() {
+    difference() {
+        union() {
+            cube( [ $rib_w, $rib_d, $rib_h - $rib_d/2 ] );
+            translate( [ 0, $rib_d/2, $rib_h - $rib_d/2 ] )
+            rotate( [ 0, 90, 0 ] ) {
+                cylinder( r=$rib_d/2, h=$rib_w );
+            }
+        };
+        
+        translate( [ $rib_w/4, 0-$eps, $rib_h+$eps ] ) {
+            rotate( -90, [ 1, 0, 0 ] )
+            linear_extrude( height = $rib_d + 2 * $eps) {
+                polygon( [ [ 0, 0 ],
+                           [ $rib_w/2, 0 ],
+                           [ $rib_w/4, 2*$rib_h/3 ]] );
             }
         }
     }
@@ -114,7 +136,7 @@ if( true ) {
 }
 
     // ribs
-if( true ) {
+if( false ) {
     translate( [ ( $foot_w - $rib_w ) / 2, ( $foot_d - $rib_d ) / 2 - ( $rib_gap_d + $rib_d ) * 1.5, 0 ] ) {
         Rib();
     }
@@ -128,6 +150,15 @@ if( true ) {
         Rib();
     }
 }
+
+    // new walls
+if( true ) {
+    for( i=[0:3] ) {
+        translate( [ 0, ( $foot_d - $rib_d ) / 3 * i, 0 ] )
+        Wall();
+    }
+}
+
     // standoffs
 if( true ) {
     for( i=[0:3] ) {
