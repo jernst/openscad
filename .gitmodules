@@ -1,0 +1,3 @@
+[submodule "vendor/threads-scad"]
+	path = vendor/threads-scad
+	url = https://github.com/jernst/threads-scad.git
